@@ -1,0 +1,20 @@
+{
+  "name": "gatsby-source-feedparser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gatsby-node.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Les Orchard <me@lmorchard.com>",
+  "license": "MIT",
+  "keywords": [
+    "gatsby",
+    "gatsby-plugin",
+    "gatsby-source-plugin"
+  ],
+  "dependencies": {
+    "feedparser": "^2.2.9",
+    "node-fetch": "^2.6.0"
+  }
+}

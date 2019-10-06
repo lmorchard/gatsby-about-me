@@ -1,0 +1,32 @@
+import { StaticQuery, graphql } from "gatsby";
+
+# Hello world
+
+This is a test.
+  
+  <StaticQuery
+    query={graphql`
+      query HeadingQuery {
+        site {
+          siteMetadata {
+            title
+          }
+        }
+        allFeedparser {
+          edges {
+            node {
+              link
+              title
+              date
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <header>
+        <h1>{data.site.siteMetadata.title}</h1>
+        <pre>{JSON.stringify(data.allFeedparserLmoTyping.edges, null, ' ')}</pre>
+      </header>
+    )}
+  />

@@ -10,6 +10,7 @@ module.exports = {
     siteUrl: `https://lmorchard.com/`,
   },
   plugins: [
+    `gatsby-plugin-sass`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -27,7 +28,7 @@ module.exports = {
       resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: {
-          default: require.resolve("./src/components/layouts/default.js"),
+          default: require.resolve("./src/layouts/default.js"),
         },
       },
     },

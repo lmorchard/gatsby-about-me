@@ -1,32 +1,211 @@
-import { StaticQuery, graphql } from "gatsby";
+import { graphql } from "gatsby";
+import { theme } from "../../src/lib/theme";
+import "./index.scss";
 
-# Hello world
+<Header title="Les Orchard <me@lmorchard.com>" />
 
-This is a test.
+<CardLayout>
   
-  <StaticQuery
-    query={graphql`
-      query HeadingQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-        allFeedparser {
-          edges {
-            node {
-              link
-              title
-              date
-            }
-          }
+<Avatar theme={theme()} title="That's me!" />
+
+<Bio theme={theme()} title="About Me">
+
+**TL;DR**: _Tinkerer; maker of things; webdev; crazy cat gentleman;
+[serial enthusiast]; Mozillian. He / him._
+
+I don't like writing my own bio. So, I've been kicking around that too-clever
+thing above for the last decade or so. Seems like it's been a stable
+description, if you don't mind reading curly braces.
+
+Tinkering with data & code is something I like _much_ better than writing a bio.
+So, the rest of this page is a collection of my personal data exhaust and featured
+projects.
+
+If you feel like it, drop me [an email](mailto:me@lmorchard.com) or
+[a tweet](https://twitter.com/lmorchard) or
+[a toot](https://toot.lmorchard.com/@lmorchard) &mdash; or find me in one of
+the other usual places below.
+
+[serial enthusiast]: https://blog.lmorchard.com/2006/05/26/confessions-of-a-serial-enthusiast/
+
+</Bio>
+
+<Github {...props.data.github.edges[0].node} maxItems={7} theme={theme()} />
+
+<ActivityPub
+  {...props.data.toots.edges[0].node}
+  name="Toots"
+  username="lmorchard"
+  maxItems={7}
+  theme={theme()}
+/>
+
+<Twitter {...props.data.twitter.edges[0].node} maxItems={7} theme={theme()} />
+
+<Feed
+  items={props.data.pinboardFeed.edges.map(item => item.node)}
+  title="Pinboard"
+  link="https://pinboard.in/u:deusx"
+  maxItems={12}
+  theme={theme()}
+/>
+
+<YouTube {...props.data.youtube.edges[0].node} maxItems={12} theme={theme()} />
+
+<Project
+  title="Twitch Streaming"
+  link="https://twitch.tv/lmorchard"
+  iframe="https://player.twitch.tv/?channel=lmorchard&muted=true&autoplay=true"
+  theme={theme()}>
+
+Lately, I've been thinking I should start trying to get out of my head more and
+share what I do via streaming on Twitch.
+
+[Chiptunes and coding, come say hi.](https://twitch.tv/lmorchard)
+
+</Project>
+
+<Feed
+  items={props.data.typingBlogFeed.edges.map(item => item.node)}
+  title="typing.lmorchard.com"
+  link="https://typing.lmorchard.com"
+  maxItems={12}
+  theme={theme()}
+/>
+
+<Glitch {...props.data.glitch.edges[0].node} theme={theme()} />
+
+<Project
+  title="Firefox Test Pilot"
+  link="https://testpilot.firefox.com/"
+  thumbnail={require('../assets/testpilot.png')}
+  theme={theme()}>
+
+I'm [a core contributor][] on the [Firefox Test Pilot][test pilot] project.
+[Test Pilot][] invites Firefox users to try out experimental features. We build
+the features as rapid prototypes and measure usage to help decide whether the
+feature might be worth inclusion in Firefox.
+
+[test pilot]: https://testpilot.firefox.com/
+[a core contributor]: https://github.com/mozilla/testpilot/graphs/contributors
+
+</Project>
+
+<Project
+  title="Firefox Color"
+  link="https://testpilot.firefox.com/experiments/color"
+  thumbnail={require('../assets/fx-color.jpg')}
+  theme={theme()}>
+
+"[Firefox Color][] makes it easy for anyone to change the look of Firefox."
+
+It's also a Test Pilot experiment [that I helped build][build], playing with
+new [Theme APIs in Firefox][theme apis] and user interface ideas for working
+with and sharing themes.
+
+[build]: https://github.com/mozilla/FirefoxColor/graphs/contributors
+[theme apis]: https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/theme
+[firefox color]: https://testpilot.firefox.com/experiments/color
+
+</Project>
+
+<Feed
+  items={props.data.blogFeed.edges.map(item => item.node)}
+  title="blog.lmorchard.com"
+  link="https://blog.lmorchard.com"
+  maxItems={12}
+  theme={theme()}
+/>
+
+<Spotify {...props.data.spotify.edges[0].node} maxItems={7} theme={theme()} />
+
+<Steam {...props.data.steam.edges[0].node} maxItems={10} theme={theme()} />
+
+<Goodreads {...props.data.goodreads.edges[0].node} maxItems={10} theme={theme()} />
+
+</CardLayout>
+
+export const pageQuery = graphql`
+  {
+    pinboardFeed: allFeedparser(filter: { feedName: { eq: "Pinboard" } }) {
+      edges {
+        node {
+          ...feedItem
         }
       }
-    `}
-    render={data => (
-      <header>
-        <h1>{data.site.siteMetadata.title}</h1>
-        <pre>{JSON.stringify(data.allFeedparserLmoTyping.edges, null, ' ')}</pre>
-      </header>
-    )}
-  />
+    }
+    typingBlogFeed: allFeedparser(filter: { feedName: { eq: "LMOTyping" } }) {
+      edges {
+        node {
+          ...feedItem
+        }
+      }
+    }
+    blogFeed: allFeedparser(filter: { feedName: { eq: "LMOBlog" } }) {
+      edges {
+        node {
+          id
+          title
+          link
+          date
+        }
+      }
+    }
+    toots: allActivityPub(filter: { name: { eq: "lmorchard" } }) {
+      edges {
+        node {
+          ...activityPubOutbox
+        }
+      }
+    }
+    youtube: allYoutube {
+      edges {
+        node {
+          ...youtubeSearch
+        }
+      }
+    }
+    glitch: allGlitchUser {
+      edges {
+        node {
+          ...glitchUser
+        }
+      }
+    }
+    github: allGithubEvents {
+      edges {
+        node {
+          ...githubPublicEvents
+        }
+      }
+    }
+    twitter: allTwitter {
+      edges {
+        node {
+          ...twitterTimeline
+        }
+      }
+    }
+    spotify: allSpotify {
+      edges {
+        node {
+          ...spotifyActivity
+        }
+      }
+    }
+    steam: allSteam {
+      edges {
+        node {
+          ...steamActivity
+        }
+      }
+    }
+    goodreads: allGoodreads {
+      edges {
+        node {
+          ...goodreadsActivity
+        }
+      }
+    }
+  }
+`;

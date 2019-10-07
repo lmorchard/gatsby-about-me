@@ -1,0 +1,33 @@
+@import './src/styles/theme';
+@import './src/styles/colors';
+
+// @import "~fxemoji/dist/symbols/style.css";
+@font-face {
+  font-family: "fxemoji-symbols";
+  src: url('../../node_modules/fxemoji/dist/symbols/symbols.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: $color-rich-black;
+  color: #eeeeee;
+  font: 14px sans-serif;
+  text-align: inherit;
+}
+
+h2 {
+  text-align: center;
+}
+
+.card.avatar {
+  div.img {
+    height: 100%;
+    text-align: center;
+    img {
+      height: 100%;
+    }
+  }
+}

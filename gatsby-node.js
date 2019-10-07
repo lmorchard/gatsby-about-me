@@ -146,17 +146,14 @@ async function sourceNodesTwitter(
 ) {
   const { username } = config;
   const client = new Twitter(config);
-  const data = {
-    username,
-    timeline: await new Promise((resolve, reject) => {
-      client.get(
-        "statuses/user_timeline",
-        { screen_name: username },
-        (error, statuses, response) =>
-          error ? reject(error) : resolve({ username, statuses })
-      );
-    }),
-  };
+  const data = await new Promise((resolve, reject) => {
+    client.get(
+      "statuses/user_timeline",
+      { screen_name: username },
+      (error, statuses, response) =>
+        error ? reject(error) : resolve({ username, statuses })
+    );
+  });
   createNode({
     ...data,
     id: createNodeId(`twitter-${username}`),

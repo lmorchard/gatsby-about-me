@@ -15,6 +15,6 @@
   ],
   "dependencies": {
     "feedparser": "^2.2.9",
-    "node-fetch": "^2.6.0"
+    "node-fetch": "^2.6.1"
   }
 }

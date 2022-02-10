@@ -25,7 +25,7 @@
     "gatsby-plugin-sass": "^2.1.17",
     "gatsby-source-filesystem": "^2.1.29",
     "gatsby-source-github": "0.0.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "prettier": "^1.18.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

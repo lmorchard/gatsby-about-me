@@ -20,7 +20,7 @@
     "dotenv": "^8.1.0",
     "fxemoji": "git+https://github.com/mozilla/fxemoji.git",
     "gatsby": "^2.15.29",
-    "gatsby-plugin-mdx": "^1.0.47",
+    "gatsby-plugin-mdx": "^2.14.1",
     "gatsby-plugin-page-creator": "^2.1.24",
     "gatsby-plugin-sass": "^2.1.17",
     "gatsby-source-filesystem": "^2.1.29",
